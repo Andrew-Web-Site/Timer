@@ -1,0 +1,32 @@
+html {
+  background-color: burlywood;
+}
+#allTime {
+  content: '';
+  background-color: yellow;
+  display: inline-block;
+  width: 250px;
+}
+
+.text {
+  float: left;
+}
+.hours {
+  float: left;
+}
+
+.minutes {
+  float: left;
+}
+
+.seconds {
+  float: left;
+}
+
+.separation {
+  float: left;
+}
+
+button {
+  background-color: rgb(211, 82, 115);
+}
