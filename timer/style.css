@@ -30,3 +30,8 @@ html {
 button {
   background-color: rgb(211, 82, 115);
 }
+
+img {
+  float: right;
+  background-color: indigo;
+}
