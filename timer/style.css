@@ -1,37 +1,18 @@
 html {
-  background-color: burlywood;
+  background-color: white;
+  height: 100%;
 }
-#allTime {
-  content: '';
-  background-color: yellow;
+
+body {
+  height: inherit;
+  background-color: red;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
   display: inline-block;
-  width: 250px;
-}
-
-.text {
-  float: left;
-}
-.hours {
-  float: left;
-}
-
-.minutes {
-  float: left;
-}
-
-.seconds {
-  float: left;
-}
-
-.separation {
-  float: left;
-}
-
-button {
-  background-color: rgb(211, 82, 115);
-}
-
-img {
-  float: right;
-  background-color: indigo;
+  font-size: 10rem;
 }

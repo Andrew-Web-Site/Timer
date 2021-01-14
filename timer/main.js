@@ -1008,7 +1008,7 @@ const Clock = setInterval(Time, 1000);
 setTimeout(clearInterval(Clock), 5000);*/
 
 
-const btnStop = document.querySelector(`.stop`);
+/* const btnStop = document.querySelector(`.stop`);
 const btnStart = document.querySelector(`.start`);
 const btnReset = document.querySelector(`.reset`);
 
@@ -1063,4 +1063,192 @@ function terminate() {
 
 btnStart.addEventListener (`click`, countTime);
 btnReset.addEventListener (`click`, restart);
-btnStop.addEventListener (`click`, terminate);
+btnStop.addEventListener (`click`, terminate); */
+
+
+/*const bod = document.querySelector(`body`);
+const spinner = document.querySelector('div');
+let rotateCount = 0;
+let startTime = null;
+let rAF;
+let i = 0;
+
+
+function draw(timestamp) {
+  if(!startTime) {
+  startTime = timestamp;
+  }
+  rotateCount = (timestamp - startTime) /3;
+  if (rotateCount > 359) {
+    rotateCount %= 360;
+  }
+  spinner.style.transform = `rotate(${rotateCount}deg)`;
+  rAF = requestAnimationFrame(draw);
+}
+
+function calc() {
+  if (rotateCount === 0) {
+    draw();
+  } else {
+    cancelAnimationFrame(rAF);
+    rotateCount = 0;
+  }
+}
+
+
+bod.addEventListener(`click`, calc); */
+
+
+
+/* const spinner = document.querySelector(`.spinner p`);
+const spinnerContainer = document.querySelector(`.spinner`);
+let rotateCount = 0;
+let startTime = null;
+let rAF;
+const btn = document.querySelector(`button`);
+const result = document.querySelector(`.result`);
+
+function random(min, max) {
+  let num = Math.floor(Math.random()*(max-min)) + min;
+  return num;
+}
+
+function draw(timestamp) {
+  if(!startTime) {
+    startTime = timestamp;
+  }
+  
+  rotateCount = (timestamp - startTime) / 3;
+
+  if(rotateCount > 359) {
+    rotateCount %= 360;
+  }
+
+  spinner.style.transform = `rotate(${rotateCount}deg)`;
+  rAF = requestAnimationFrame(draw);
+}
+
+result.style.display = `none`;
+spinnerContainer.style.display = `none`;
+
+function reset() {
+  btn.style.display = `block`;
+  result.textContent = ``;
+  result.style.display = `none`;
+}
+
+btn.addEventListener(`click`, start);
+
+function start() {
+  draw();
+  spinnerContainer.style.display = `block`;
+  btn.style.display = `none`;
+  setTimeout(setEndgame, random(5000,10000));
+}
+
+function setEndgame() {
+  cancelAnimationFrame(rAF);
+  spinnerContainer.style.display = `none`;
+  result.style.display = `block`;
+  result.textContent = `GO!!!`;
+
+  document.addEventListener(`keydown`, keyHandler);
+
+  function keyHandler(e) {
+    let isOver = false;
+    console.log(e.key);
+
+    if (e.key === `a`) {
+      result.textContent = `Player 1 won!`;
+      isOver = true;
+    } else if (e.key === `l`) {
+      result.textContent = `Player 2 won!`;
+      isOver = true;
+  }
+
+  if (isOver) {
+    document.removeEventListener(`keydown`, keyHandler);
+    setTimeout(reset, 5000);
+  }
+}
+}*/
+
+
+/* let promise = fetch(`coffee.jpg`);
+let promise2 = promise.then(response => {
+  if (!response.ok) {
+    throw new Error(`Http error! status ${response.status}`);
+  } else {
+    return response.blob();
+  }
+});
+let promise3 = promise2.then(myBlob => {
+  let objectURL = URL.createObjectURL(myBlob);
+  let image = document.createElement(`img`);
+  image.src = objectURL;
+  document.body.appendChild(image);
+});
+let errorCase = promise3.catch(e => {
+  console.log(`There has been a problem` + e.message);
+}); */
+
+
+/*fetch(`coffee.jpg`)
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`Http error! status ${response.status}`);
+  } else {
+    return response.blob();
+  }
+})
+then.(myBlob => {
+  let objectURL = URL.createObjectURL(myBlob);
+  let image = document.createElement(`img`);
+  image.src = objectURL;
+  document.body.appendChild(image);
+})
+.catch(e => {
+  console.log(`There has been a problem` + e.message);
+}) */
+
+
+function fetchAndDecode(url, type) {
+  return fetch(url).then(response => {
+    if(!response.ok) {
+      throw new Error(`HTTP error! status: ` + response.status);
+    } else {
+      if(type === `blob`) {
+        return response.blob();
+      } else if  (type === `text`) {
+        return response.text();
+      }
+    }
+  })
+  .catch(e => {
+  console.log(`There has been a problem: ` + e.message);
+  });
+}
+
+let coffee = fetchAndDecode(`coffee.jpg`, `blob`);
+let tea = fetchAndDecode(`tea.jpg`, `blob`);
+let description = fetchAndDecode(`description.txt`, `text`);
+
+Promise.all([coffee, tea, description]).then(values => {
+  console.log(values);
+  let objectURL1 = URL.createObjectURL(values[0]);
+  let objectURL2 = URL.createObjectURL(values[1]);
+  let descText = values[2];
+
+  let image1 = document.createElement(`img`);
+  let image2 = document.createElement(`img`);
+  let text = document.createElement(`p`);
+
+  image1.src = objectURL1;
+  image2.src = objectURL2;
+  text.textContent = descText;
+
+  document.body.appendChild(image1);
+  document.body.appendChild(image2);
+  document.body.appendChild(text);
+})
+ 
